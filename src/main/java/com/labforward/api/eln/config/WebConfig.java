@@ -23,6 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     /**
      * Used for entity/DTO mappings
+     *
      * @return
      */
     @Bean
