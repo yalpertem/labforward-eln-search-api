@@ -4,6 +4,7 @@ import com.labforward.api.eln.modules.entry.dto.EntryDto;
 import com.labforward.api.eln.modules.entry.dto.EntryDtoConverter;
 import com.labforward.api.eln.modules.entry.entity.Entry;
 import com.labforward.api.eln.modules.entry.service.EntryService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,7 @@ public class EntryController {
 
     @GetMapping("/entries")
     @ResponseBody
+    @ApiOperation(value = "Returns the list of entries")
     public List<EntryDto> getEntries() {
         List<Entry> entries = this.entryService.getEntries();
         return entries.stream()
@@ -36,6 +38,7 @@ public class EntryController {
 
     @GetMapping("/entries/{id}")
     @ResponseBody
+    @ApiOperation(value = "Returns the entry by id")
     public EntryDto getEntry(@PathVariable String id) {
         Entry entry = this.entryService.getEntry(id);
         return converter.convertToDto(entry);
@@ -43,6 +46,7 @@ public class EntryController {
 
     @PostMapping(value = "/entries")
     @ResponseBody
+    @ApiOperation(value = "Creates a new entry")
     public EntryDto createEntry(
             @Valid @RequestBody EntryDto entryDto, HttpServletRequest httpRequest) {
         Entry entry = converter.convertToEntity(entryDto);
@@ -52,12 +56,14 @@ public class EntryController {
 
     @PutMapping(value = "/entries/{id}")
     @ResponseBody
+    @ApiOperation(value = "Updates the details of the entry")
     public EntryDto updateEntry(@PathVariable String id, @Valid @RequestBody Entry request) {
         Entry entry = this.entryService.updateEntry(id, request);
         return converter.convertToDto(entry);
     }
 
     @DeleteMapping(value = "/entries/{id}")
+    @ApiOperation(value = "Deletes the entry by id")
     public void deleteEntry(@PathVariable String id) {
         this.entryService.deleteEntry(id);
     }
