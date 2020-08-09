@@ -18,7 +18,7 @@ npm install
 npm run start
 ```
 
-UI app runs on ```3000``` port by default and expects the API to be running on ```8080```). If not, you can change the base URL in file ```/eln-ui/src/util/Constants.js```.
+UI app runs on ```3000``` port by default and expects the API to be running on ```8080```. If not, you can change the base URL in file ```/eln-ui/src/util/Constants.js```.
 
 ## Quick Demo
 
