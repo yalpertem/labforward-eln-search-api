@@ -4,27 +4,36 @@ import Grid from "@material-ui/core/Grid";
 import EntryExcerptCard from "./EntryExcerptCard";
 import * as Const from "../../util/Constants";
 import { CircularProgress } from "@material-ui/core";
+import AddScreenButton from "../buttons/AddScreenButton";
+import AddDummyEntryButton from "../buttons/AddDummyEntryButton";
 
 const EntryList = (props) => {
+  let view = "";
   switch (props.status) {
     case Const.LIST_STATUS_LOADING:
-      return <CircularProgress />;
+      view = <CircularProgress />;
+      break;
+
     case Const.LIST_STATUS_ERROR:
-      return <Warning>Cannot get entries from the API</Warning>;
+      view = <Warning>Cannot get entries from the API</Warning>;
+      break;
+
     case Const.LIST_STATUS_NO_ENTRY:
-      return <Warning>You haven't created any items yet!</Warning>;
+      view = <Warning>You haven't created any items yet!</Warning>;
+      break;
+
     case Const.LIST_STATUS_SHOW:
       console.log("Const.LIST_STATUS_SHOW");
       const entries = props.entries.map((currentEntry, index) => (
         <Grid key={currentEntry.id} item xs={12} sm={6} lg={4} xl={3}>
           <EntryExcerptCard
             entry={currentEntry}
-            onDelete={() => this.props.onEntryDelete(currentEntry.id)}
-            onOpen={() => this.props.onEntryOpen(currentEntry.id)}
+            onDelete={() => props.onEntryDeleteClicked(currentEntry.id)}
+            onOpen={() => props.onEntryOpenClicked(currentEntry.id)}
           ></EntryExcerptCard>
         </Grid>
       ));
-      return (
+      view = (
         <Grid
           container
           spacing={2}
@@ -38,9 +47,18 @@ const EntryList = (props) => {
           {entries}
         </Grid>
       );
+      break;
+
     default:
-      return "";
+      break;
   }
+  return (
+    <>
+      {view}
+      <AddScreenButton clicked={props.onAddScreenButtonClicked} />
+      <AddDummyEntryButton clicked={props.onAddDummyEntryClicked} />
+    </>
+  );
 };
 
 export default EntryList;

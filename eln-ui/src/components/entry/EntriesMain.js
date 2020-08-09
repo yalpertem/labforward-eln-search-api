@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import EntryList from "./EntryList";
 import API from "../../api/Api";
+import axios from "axios";
 import * as Const from "../../util/Constants";
 import * as Helpers from "../../util/Helpers";
+import dummyEntryJSON from "../../data/entries.json";
+import AddEntryForm from "./AddEntryForm";
 
 class EntriesMain extends Component {
   constructor(props) {
@@ -50,6 +53,24 @@ class EntriesMain extends Component {
     });
   };
 
+  handleAddDummyEntryClick = () => {
+    axios
+      .all(
+        dummyEntryJSON.entries.map((entry) =>
+          API.post("/", { title: entry.title, content: entry.content })
+        )
+      )
+      .then(
+        axios.spread(() => {
+          this.getEntries();
+        })
+      );
+  };
+
+  handleAddScreenButtonClick = () => {
+    this.setState({ screen: Const.SCREEN_ADD });
+  };
+
   handleDeleteEntryClick = (id) => {
     API.delete("/" + id).then(() => this.getEntries());
   };
@@ -68,6 +89,28 @@ class EntriesMain extends Component {
     });
   };
 
+  handleAddEntryActionButtonClick = () => {
+    const { newTitle, newContent } = this.state;
+    API.post("", { title: newTitle, content: newContent }).then((response) => {
+      this.setState({
+        newTitle: "",
+        newContent: "",
+        screen: Const.SCREEN_LIST,
+      });
+      this.getEntries();
+    });
+  };
+
+  handleBackButtonClicked = () => {
+    this.setState({
+      screen: Const.SCREEN_LIST,
+    });
+  };
+
+  handleTextInputChange = (input) => (e) => {
+    this.setState({ [input]: e.target.value });
+  };
+
   render() {
     switch (this.state.screen) {
       case Const.SCREEN_LIST:
@@ -75,8 +118,20 @@ class EntriesMain extends Component {
           <EntryList
             status={this.state.status}
             entries={this.state.entries}
-            onEntryDelete={this.handleDeleteEntryClick}
-            onEntryOpen={this.handleOpenEntryClick}
+            onEntryDeleteClicked={this.handleDeleteEntryClick}
+            onEntryOpenClicked={this.handleOpenEntryClick}
+            onAddScreenButtonClicked={this.handleAddScreenButtonClick}
+            onAddDummyEntryClicked={this.handleAddDummyEntryClick}
+          />
+        );
+      case Const.SCREEN_ADD:
+        return (
+          <AddEntryForm
+            newTitle={this.state.newTitle}
+            newContent={this.state.newContent}
+            handleTextInputChange={this.handleTextInputChange}
+            addEntryClicked={this.handleAddEntryActionButtonClick}
+            backButtonClicked={this.handleBackButtonClicked}
           />
         );
 
