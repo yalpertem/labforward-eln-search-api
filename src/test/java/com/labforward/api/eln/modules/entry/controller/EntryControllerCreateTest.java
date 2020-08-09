@@ -4,7 +4,6 @@ package com.labforward.api.eln.modules.entry.controller;
 import com.labforward.api.eln.common.TestHelpers;
 import com.labforward.api.eln.common.advisor.RestControllerExceptionAdvisor;
 import com.labforward.api.eln.modules.entry.entity.Entry;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -33,7 +32,7 @@ public class EntryControllerCreateTest extends EntryControllerBaseTest {
                 .andExpect(jsonPath("$.validationErrors", hasSize(1)))
                 .andExpect(jsonPath("$.validationErrors[0].field", is("title")))
                 .andExpect(jsonPath("$.validationErrors[0].message",
-                        Matchers.is(this.NOT_EMPTY_VALIDATION_MESSAGE)));
+                        is(this.NOT_EMPTY_VALIDATION_MESSAGE)));
         verifyNoInteractions(service);
     }
 
@@ -52,7 +51,7 @@ public class EntryControllerCreateTest extends EntryControllerBaseTest {
                 .andExpect(jsonPath("$.validationErrors", hasSize(1)))
                 .andExpect(jsonPath("$.validationErrors[0].field", is("content")))
                 .andExpect(jsonPath("$.validationErrors[0].message",
-                        Matchers.is(this.NOT_EMPTY_VALIDATION_MESSAGE)));
+                        is(this.NOT_EMPTY_VALIDATION_MESSAGE)));
         verifyNoInteractions(service);
     }
 
@@ -67,8 +66,8 @@ public class EntryControllerCreateTest extends EntryControllerBaseTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", Matchers.is(this.ENTRY_ID)))
-                .andExpect(jsonPath("$.title", Matchers.is(this.ENTRY_TITLE)))
-                .andExpect(jsonPath("$.content", Matchers.is(this.ENTRY_CONTENT)));
+                .andExpect(jsonPath("$.id", is(this.ENTRY_ID)))
+                .andExpect(jsonPath("$.title", is(this.ENTRY_TITLE)))
+                .andExpect(jsonPath("$.content", is(this.ENTRY_CONTENT)));
     }
 }

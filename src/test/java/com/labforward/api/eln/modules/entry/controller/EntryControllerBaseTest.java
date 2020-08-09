@@ -11,12 +11,12 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public abstract class EntryControllerBaseTest {
 
-    protected static final String ENTRY_ID = "EntryId";
-    protected static final String ENTRY_ID_OTHER = "EntryId2";
-    protected static final String ENTRY_TITLE = "EntryTitle";
-    protected static final String ENTRY_CONTENT = "EntryContent";
+    protected final String ENTRY_ID = "EntryId";
+    protected final String ENTRY_ID_OTHER = "EntryId2";
+    protected final String ENTRY_TITLE = "EntryTitle";
+    protected final String ENTRY_CONTENT = "EntryContent";
 
-    protected static final String NOT_EMPTY_VALIDATION_MESSAGE = "must not be empty";
+    protected final String NOT_EMPTY_VALIDATION_MESSAGE = "must not be empty";
 
     @Autowired
     protected MockMvc mockMvc;

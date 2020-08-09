@@ -78,7 +78,7 @@ public class TextSearchServiceImplTest {
         SearchResultItem searchResultItem = searchResult.getSearchResultItems().get(0);
         assertEquals(0, searchResultItem.getDistance());
         assertEquals(2, searchResultItem.getFrequency());
-        assertEquals("Lorem", searchResultItem.getItem());
+        assertEquals("Lorem", searchResultItem.getWord());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TextSearchServiceImplTest {
         SearchResultItem searchResultItem = searchResult.getSearchResultItems().get(0);
         assertEquals(1, searchResultItem.getDistance());
         assertEquals(2, searchResultItem.getFrequency());
-        assertEquals("Lorem", searchResultItem.getItem());
+        assertEquals("Lorem", searchResultItem.getWord());
     }
 
     @Test

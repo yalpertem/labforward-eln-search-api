@@ -2,7 +2,6 @@ package com.labforward.api.eln.modules.entry.controller;
 
 import com.labforward.api.eln.common.exception.NotFoundException;
 import com.labforward.api.eln.modules.entry.entity.Entry;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -28,9 +27,9 @@ public class EntryControllerGetTest extends EntryControllerBaseTest {
 
         mockMvc.perform(get("/api/entries"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", Matchers.is(this.ENTRY_ID)))
-                .andExpect(jsonPath("$[0].title", Matchers.is(this.ENTRY_TITLE)))
-                .andExpect(jsonPath("$[0].content", Matchers.is(this.ENTRY_CONTENT)));
+                .andExpect(jsonPath("$[0].id", is(this.ENTRY_ID)))
+                .andExpect(jsonPath("$[0].title", is(this.ENTRY_TITLE)))
+                .andExpect(jsonPath("$[0].content", is(this.ENTRY_CONTENT)));
     }
 
     @Test
@@ -38,11 +37,11 @@ public class EntryControllerGetTest extends EntryControllerBaseTest {
         Entry entry = new Entry(this.ENTRY_ID, this.ENTRY_TITLE, this.ENTRY_CONTENT);
         when(service.getEntry(this.ENTRY_ID)).thenReturn(entry);
 
-        mockMvc.perform(get(String.format("/api/entries/%s", this.ENTRY_ID)))
+        mockMvc.perform(get("/api/entries/{id}", this.ENTRY_ID))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", Matchers.is(this.ENTRY_ID)))
-                .andExpect(jsonPath("$.title", Matchers.is(this.ENTRY_TITLE)))
-                .andExpect(jsonPath("$.content", Matchers.is(this.ENTRY_CONTENT)));
+                .andExpect(jsonPath("$.id", is(this.ENTRY_ID)))
+                .andExpect(jsonPath("$.title", is(this.ENTRY_TITLE)))
+                .andExpect(jsonPath("$.content", is(this.ENTRY_CONTENT)));
     }
 
     @Test
@@ -50,7 +49,7 @@ public class EntryControllerGetTest extends EntryControllerBaseTest {
         when(service.getEntry(this.ENTRY_ID)).
                 thenThrow(new NotFoundException());
 
-        mockMvc.perform(get(String.format("/api/entries/%s", this.ENTRY_ID)))
+        mockMvc.perform(get("/api/entries/{id}", this.ENTRY_ID))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", is(NotFoundException.MESSAGE)));
     }

@@ -1,7 +1,7 @@
 package com.labforward.api.eln.modules.entry.controller;
 
 import com.labforward.api.eln.modules.entry.dto.EntryDto;
-import com.labforward.api.eln.modules.entry.dto.EntryDtoConverter;
+import com.labforward.api.eln.modules.entry.dto.converter.EntryDtoConverter;
 import com.labforward.api.eln.modules.entry.entity.Entry;
 import com.labforward.api.eln.modules.entry.service.EntryService;
 import io.swagger.annotations.ApiOperation;

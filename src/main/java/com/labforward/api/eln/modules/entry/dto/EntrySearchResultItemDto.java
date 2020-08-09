@@ -1,4 +1,4 @@
-package com.labforward.api.eln.modules.text.entity;
+package com.labforward.api.eln.modules.entry.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class SearchResultItem {
+public class EntrySearchResultItemDto {
 
     @NotEmpty
     private String word;
@@ -20,18 +20,18 @@ public class SearchResultItem {
     @NotNull
     private List<Integer> occurrences;
 
-    public SearchResultItem() {
+    public EntrySearchResultItemDto() {
 
     }
 
-    public SearchResultItem(String word, int distance, int frequency, List<Integer> occurrences) {
+    public EntrySearchResultItemDto(String word, int distance, int frequency, List<Integer> occurrences) {
         this.word = word;
         this.distance = distance;
         this.frequency = frequency;
         this.occurrences = occurrences;
     }
 
-    public SearchResultItem(String word, int distance, List<Integer> occurrences) {
+    public EntrySearchResultItemDto(String word, int distance, List<Integer> occurrences) {
         this.word = word;
         this.distance = distance;
         this.frequency = 1;
@@ -74,7 +74,7 @@ public class SearchResultItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SearchResultItem that = (SearchResultItem) o;
+        EntrySearchResultItemDto that = (EntrySearchResultItemDto) o;
         return frequency == that.frequency &&
                 distance == that.distance &&
                 word.equals(that.word) &&

@@ -1,5 +1,6 @@
-package com.labforward.api.eln.modules.entry.dto;
+package com.labforward.api.eln.modules.entry.dto.converter;
 
+import com.labforward.api.eln.modules.entry.dto.EntryDto;
 import com.labforward.api.eln.modules.entry.entity.Entry;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
