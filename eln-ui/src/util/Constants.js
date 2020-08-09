@@ -12,5 +12,10 @@ export const LIST_STATUS_ERROR = 1;
 export const LIST_STATUS_NO_ENTRY = 2;
 export const LIST_STATUS_SHOW = 3;
 
+//Search Result Status
+export const SEARCH_RESULT_HIDE = 0;
+export const SEARCH_RESULT_WARNING = 1;
+export const SEARCH_RESULT_SHOW = 2;
+
 //Magic Numbers
 export const MAX_LEN_CONTENT = 120;

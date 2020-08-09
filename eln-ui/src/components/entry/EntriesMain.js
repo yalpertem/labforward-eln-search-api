@@ -6,6 +6,7 @@ import * as Const from "../../util/Constants";
 import * as Helpers from "../../util/Helpers";
 import dummyEntryJSON from "../../data/entries.json";
 import AddEntryForm from "./AddEntryForm";
+import EntryDetails from "./EntryDetails";
 
 class EntriesMain extends Component {
   constructor(props) {
@@ -14,6 +15,12 @@ class EntriesMain extends Component {
       screen: Const.SCREEN_LIST,
       status: Const.LIST_STATUS_LOADING,
       entries: [],
+      newTitle: "",
+      newContent: "",
+      searchWord: "",
+      lastSearchWord: "",
+      searchResult: null,
+      showSearchResult: false,
       opened: {
         id: "",
         title: "",
@@ -104,6 +111,20 @@ class EntriesMain extends Component {
   handleBackButtonClicked = () => {
     this.setState({
       screen: Const.SCREEN_LIST,
+      searchResult: null,
+      newTitle: "",
+      newContent: "",
+      searchWord: "",
+      lastSearchWord: "",
+    });
+  };
+
+  handleSearchWordButtonClicked = () => {
+    const word = this.state.searchWord;
+    const entryId = this.state.opened.id;
+    this.setState({ lastSearchWord: word });
+    API.get("/" + entryId + "/search/" + word).then((response) => {
+      this.setState({ searchResult: response.data, showSearchResult: true });
     });
   };
 
@@ -124,6 +145,7 @@ class EntriesMain extends Component {
             onAddDummyEntryClicked={this.handleAddDummyEntryClick}
           />
         );
+
       case Const.SCREEN_ADD:
         return (
           <AddEntryForm
@@ -131,6 +153,21 @@ class EntriesMain extends Component {
             newContent={this.state.newContent}
             handleTextInputChange={this.handleTextInputChange}
             addEntryClicked={this.handleAddEntryActionButtonClick}
+            backButtonClicked={this.handleBackButtonClicked}
+          />
+        );
+
+      case Const.SCREEN_VIEW:
+        return (
+          <EntryDetails
+            entryTitle={this.state.opened.title}
+            entryContent={this.state.opened.content}
+            searchResult={this.state.searchResult}
+            showSearchResult={this.state.showSearchResult}
+            searchWord={this.state.searchWord}
+            lastSearchWord={this.state.lastSearchWord}
+            handleTextInputChange={this.handleTextInputChange}
+            searchWordClicked={this.handleSearchWordButtonClicked}
             backButtonClicked={this.handleBackButtonClicked}
           />
         );
