@@ -7,7 +7,7 @@ ELN Crud/Search is a Spring Boot Java REST API for dealing with Crud and search 
 In order to run the REST API, please use [Maven](https://maven.apache.org/) wrapper for a quick run. (Runs on ```8080``` port by default).
 
 ```bash
-mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 
 To run the UI, you can use the following to run on ```webpack-dev-server```.
