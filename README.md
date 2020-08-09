@@ -37,7 +37,7 @@ UI app runs on ```3000``` port by default and expects the API to be running on `
   * Did not implement any Security related developments such as Authentication, checking HTTP Headers etc.
   * No performance checks and monitoring implemented.
   * No automated build, test, deployment configuration.
-  * No code authentication, error handling, code refactor, cleanup, performance optimization etc for front-end application. It is created only for presentation purpose. I appreciate if you don't evaluate the code style and architecture since it's just a quick scribble. Only, text-highlighting part was a good algorithmic challenge for me.
+  * No authentication, error handling, code refactor, cleanup, render performance optimization etc. for front-end application. It is created only for presentational purpose. I would appreciate if you don't evaluate the code style and architecture in UI code since it's just a quick scribble. Only, text-highlighting part was a good algorithmic challenge for me.
 
 ## Built With
 
